@@ -21,6 +21,8 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Blank means any url that is sent, dispatch it and send it to api.urls
-    path('api/', include('api.urls'))
+    path('api/', include('api.urls')),
+    # Blank means any url that is sent, dispatch it and send it to our frontend homepage
+    path("", include('frontend.urls'))
 ]
 
