@@ -5,5 +5,7 @@ from .views import index
 
 urlpatterns = [
     # Blank means any url that is sent, dispatch it and send it to our frontend homepage
-    path("", index)
+    path('', index), 
+    path('join', index),
+    path('create', index)
 ]
