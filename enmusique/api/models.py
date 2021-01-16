@@ -18,7 +18,7 @@ def generate_unique_code():
 
     while True: 
         # This will generate a random code that is of length k and only contains ascii_uppercase characters
-        code = ''.join(random.choices(string.ascii_uppercase), k = length)
+        code = ''.join(random.choices(string.ascii_uppercase, k=length))
         # Filtering all room objects by code and if any code is == to code, and the count of that is 0, we konw have a unique code
         if Room.objects.filter(code=code).count() == 0:
             break
@@ -29,7 +29,7 @@ def generate_unique_code():
 # Create your models here.
 # This is going to me a model (Inheritance)
 class Room(models.Model):
-    code = models.CharField(max_length = 8, default="", unique = True)
+    code = models.CharField(max_length = 8, default=generate_unique_code, unique = True)
     host = models.CharField(max_length = 50, unique = True)
     #null = False means we must pass in a value
     guest_can_pause = models.BooleanField(null = False, default = False)

@@ -13,3 +13,10 @@ class RoomSerializer(serializers.ModelSerializer):
         model = Room
         # On each of our model we have a unique key
         fields = ('id', 'code', 'host', 'guest_can_pause', 'votes_to_skip', 'created_at')
+
+class CreateRoomSerializer(serializers.ModelSerializer): 
+    class Meta: 
+        model = Room
+        # Fields that we want to be sent as part of the post request
+        # This is going to seriliaze a request, take the data from the request and make sure it's all correct
+        fields = ('guest_can_pause', 'votes_to_skip')
