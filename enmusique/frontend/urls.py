@@ -7,5 +7,6 @@ urlpatterns = [
     # Blank means any url that is sent, dispatch it and send it to our frontend homepage
     path('', index), 
     path('join', index),
-    path('create', index)
+    path('create', index),
+    path('room/<str:roomCode>', index)
 ]
