@@ -10,7 +10,7 @@ export default class App extends Component {
   render() {
     return (
     // need to have a parent element
-    <div>
+    <div className="center">
       <HomePage />
     </div>
     );
