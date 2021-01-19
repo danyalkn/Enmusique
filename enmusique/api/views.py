@@ -5,6 +5,7 @@ from .serializers import RoomSerializer, CreateRoomSerializer
 from .models import Room
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.http import JsonResponse
 
 
 
@@ -96,3 +97,22 @@ class CreateRoomView(APIView):
 
         # .data will give us JSON formatted data
         return Response(RoomSerializer(room).data, status=status.HTTP_200_OK)
+
+# Send a get request and check if person is a room
+"""
+Going to return a JSON response. What this does is take a Python dictionary and serialize it, 
+using a Jason serializer and then sends that information back to the front-end or sends it 
+in the request. Similar to our room serializer. It's the exact same thing, except we're just 
+going to take an arbitrary Python dictionary rather than a Python object, like a room or, you
+know, like database models that we have.
+"""
+class UserInRoom(APIView): 
+    def get(self, request, format=None):
+        if not self.request.session.exists(self.request.session.session_key):
+            self.request.session.create()
+
+        data = {
+            'code': self.request.session.get('room_code')
+        }
+
+        return JsonResponse(data, status=status.HTTP_200_OK)
