@@ -116,3 +116,20 @@ class UserInRoom(APIView):
         }
 
         return JsonResponse(data, status=status.HTTP_200_OK)
+
+"""
+I'm making this a post request because we're changing information on the server. We're going to 
+be removing the information from the room code in the user session. So it makes sense to make that
+a post request because posts usually means you're updating or adding or doing something on the 
+server changing information.
+"""
+class LeaveRoom(APIView):
+    def post(self, request, format=None):
+        if 'room_code' in self.request.session:
+            self.request.session.pop('room_code')
+            host_id = self.request.session.session_key
+            room_results = Room.objects.filter(host=host_id)
+            if len(room_results) > 0: 
+                room  = room_results[0]
+                room.delete()
+        return Response({'Message': 'Success'}, status=status.HTTP_200_OK)
