@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Grid, Button, Typography } from "@material-ui/core";
+import CreateRoomPage from "./CreateRoomPage";
 // Match is the prop that stores all of the information about essentially how we got to this component from react router. So that's what react router does.
 // It adds match as a prop to this component when it's rendered. And of course we can access the room code, the parameters of the URL.
 
@@ -10,10 +11,14 @@ export default class Room extends Component {
       votesToSkip: 2,
       guestCanPause: false,
       isHost: false,
+      showSetting: false,
     };
     this.roomCode = this.props.match.params.roomCode;
     this.getRoomDetails();
     this.leaveButtonPressed = this.leaveButtonPressed.bind(this);
+    this.updateShowSettings = this.updateShowSettings.bind(this);
+    this.renderSettingsButton = this.renderSettingsButton.bind(this);
+    this.renderSettings = this.renderSettings.bind(this);
   }
 
   getRoomDetails() {
@@ -45,7 +50,57 @@ export default class Room extends Component {
     });
   }
 
+  updateShowSettings(value) {
+    this.setState({
+      showSetting: value,
+    });
+  }
+
+  renderSettings() {
+    return (
+      <Grid container spacing={1}>
+        <Grid item xs={12} align="center">
+          {/* Telling the CreateRoomPage component that you're going to be in update mode, not create mode */}
+          <CreateRoomPage
+            update={true}
+            votesToSkip={this.state.votesToSkip}
+            guestCanPause={this.state.guestCanPause}
+            roomCode={this.roomCode}
+            updateCallback={this.getRoomDetails}
+          />
+        </Grid>
+        <Grid item xs={12} align="center">
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => this.updateShowSettings(false)}
+          >
+            Close
+          </Button>
+        </Grid>
+      </Grid>
+    );
+  }
+
+  /* Using a method because we only want to show the settings if it's only the host */
+  renderSettingsButton() {
+    return (
+      <Grid item xs={12} align="center">
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => this.updateShowSettings(true)}
+        >
+          Setting
+        </Button>
+      </Grid>
+    );
+  }
+
   render() {
+    if (this.state.showSetting) {
+      return this.renderSettings();
+    }
     return (
       <Grid container spacing={1}>
         <Grid item xs={12} align="center">
@@ -68,6 +123,7 @@ export default class Room extends Component {
             Host: {this.state.isHost.toString()}
           </Typography>
         </Grid>
+        {this.state.isHost ? this.renderSettingsButton() : null}
         <Grid item xs={12} align="center">
           <Button
             color="secondary"
