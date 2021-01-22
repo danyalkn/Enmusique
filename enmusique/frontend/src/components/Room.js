@@ -8,17 +8,17 @@ export default class Room extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      votesToSkip: 2,
       guestCanPause: false,
       isHost: false,
-      showSetting: false,
+      showSettings: false,
     };
     this.roomCode = this.props.match.params.roomCode;
-    this.getRoomDetails();
     this.leaveButtonPressed = this.leaveButtonPressed.bind(this);
     this.updateShowSettings = this.updateShowSettings.bind(this);
     this.renderSettingsButton = this.renderSettingsButton.bind(this);
     this.renderSettings = this.renderSettings.bind(this);
+    this.getRoomDetails = this.getRoomDetails.bind(this);
+    this.getRoomDetails();
   }
 
   getRoomDetails() {
@@ -52,7 +52,7 @@ export default class Room extends Component {
 
   updateShowSettings(value) {
     this.setState({
-      showSetting: value,
+      showSettings: value,
     });
   }
 
@@ -91,14 +91,14 @@ export default class Room extends Component {
           color="primary"
           onClick={() => this.updateShowSettings(true)}
         >
-          Setting
+          Settings
         </Button>
       </Grid>
     );
   }
 
   render() {
-    if (this.state.showSetting) {
+    if (this.state.showSettings) {
       return this.renderSettings();
     }
     return (
