@@ -3,6 +3,9 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background: linear-gradient(-45deg, #EE7752, #E73C7E, #3b4cb4, #23A6D5);
+  background-size: 400% 400%;
+  animation: change 20s ease-in-out infinite;
 }
 
 #main {
@@ -32,4 +35,16 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+@keyframes change {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
 }
