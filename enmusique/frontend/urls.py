@@ -10,6 +10,7 @@ urlpatterns = [
     # Blank means any url that is sent, dispatch it and send it to our frontend homepage
     # Need formal names so when we call the redirect function we know which path to go to
     path('', index, name=""), 
+    path('info', index),
     path('join', index),
     path('create', index),
     path('room/<str:roomCode>', index), 
