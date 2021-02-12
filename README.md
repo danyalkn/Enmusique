@@ -22,7 +22,7 @@ Full stack web application designed to play music on Spotify collaboratively by 
 
 ![HomePage Page](enmusique/frontend/static/images/homepage.png "Homepage")
 
-![Joinpage Page](enmusique/frontend/static/images/joinroom.png "Homepage")
+![Joinpage Page](enmusique/frontend/static/images/joinroompage.png "Homepage")
 
 ![Createroom Page](enmusique/frontend/static/images/createroompage.png "Homepage")
 
